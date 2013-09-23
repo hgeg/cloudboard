@@ -33,14 +33,16 @@ def setGlobal(content):
     with open('dump.html','w') as f: f.write(r.text)
 
 def setLocal(message):
+  print 'push received with message: ',message
   pyperclip.copy(message['text'])
   print "cboard:",pyperclip.paste()
 
 def subscribe():
-  pubnub.subscribe({
-    'channel'  : USER,
-    'callback' : setLocal
-  })
+  while True:
+    pubnub.subscribe({
+      'channel'  : USER,
+      'callback' : setLocal
+    })
 
 class ClipboardWatcher(threading.Thread):
     def __init__(self, callback, pause=5.0):
@@ -48,9 +50,9 @@ class ClipboardWatcher(threading.Thread):
         self._callback = callback
         self._pause = pause
         self._stopping = False
-        sub_thread = threading.Thread(target=subscribe)
-        sub_thread.daemon=True
-        sub_thread.start()
+        self._sub = threading.Thread(target=subscribe)
+        self._sub.daemon=True
+        self._sub.start()
 
     def run(self):       
         recent_value = ""
