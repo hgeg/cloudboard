@@ -29,7 +29,8 @@ def setGlobal(content):
       'signature': hashlib.md5('%s&%s&%s'%(timestamp,hashlib.md5(PASS).hexdigest(),API_SECRET)).hexdigest()
       }
 
-    r = requests.post('http://0.0.0.0:8787/set/',params=payload)
+    r = requests.post('http://hgeg.io/cloudboard/set/',params=payload)
+    with open('dump.html','w') as f: f.write(r.text)
 
 def setLocal(message):
   pyperclip.copy(message['text'])
