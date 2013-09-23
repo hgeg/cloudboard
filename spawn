@@ -1,0 +1,3 @@
+#!/bin/bash
+#start the server
+spawn-fcgi -d /home/ubuntu/cloudboard -f /home/ubuntu/cloudboard/cloudboard.py -a 127.0.0.1 -p $1

@@ -11,10 +11,11 @@ pubnub = Pubnub(
 )
 
 urls = (
-    '/', 'Main',
-    '/auth/', 'Auth',
-    '/set/', 'Setter',
-    '/get/', 'Getter',
+    '/cloudboard/', 'Main',
+    '/cloudboard', 'Main',
+    '/cloudboard/auth/', 'Auth',
+    '/cloudboard/set/', 'Setter',
+    '/cloudboard/get/', 'Getter',
 )
 
 app = web.application(urls, globals())
@@ -89,4 +90,5 @@ class Getter:
     return '{"error":false,"data:{"clipboard":"%s"}}'%rd.get(user)
 
 if __name__ == "__main__":
+    web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
     app.run()
