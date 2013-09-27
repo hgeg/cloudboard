@@ -28,7 +28,7 @@ api_tokens = {
 class Main:
   def GET(self):
     rd = redis.StrictRedis(host='localhost', port=6379, db=0)
-    return "Welcome to Cloudboard. TEST:%s"%rd.get('Hgeg')
+    return "Welcome to Cloudboard. test: %s"%rd.get('Hgeg')
 
 class Auth:
   def GET(self): pass
@@ -49,20 +49,27 @@ class Setter:
       return '{"error":true,"data":{"msg":"Request is too old.", "type":"AuthError", "errcode":11}}'
 
     #reconstruct signature
-    secret = api_tokens[post.key]
+    secret = api_tokens[str(post.key)]
     timestamp = post.timestamp
     user = post.user
-    signature = hashlib.md5('%s&%s&%s'%(timestamp,db[user],secret)).hexdigest()
+    signature = hashlib.md5('%s&%s&%s'%(timestamp,db[str(user)],secret)).hexdigest()
     if signature != post.signature:
         return '{"error":true,"data":{"msg":"Signature does not match." "type":"AuthError", "errcode":12}}'
     rd.set(user,post.data)
-    info = pubnub.publish({
-      'channel' : user,
-      'message' : {
-        'text' : post.data
-      }
-    })
-    print info
+    p=0
+    packetlen =  len(post.data)/100
+    for e in xrange(packetlen+1):
+      pubnub.publish({
+        'channel' : user,
+        'message' : {
+          'text' : post.data[p:(e+1)*100],
+          'timestamp': timestamp,
+          'packetlen': packetlen,
+          'packetindex': e,
+          'uniqueID': post.uniqueID
+        }
+      })
+      p = 100*(e+1)
     return '{"error":false,"data:{"clipboard":"%s"}}'%rd.get(user)
       
 
@@ -81,13 +88,13 @@ class Getter:
       return '{"error":true,"data":{"msg":"Request is too old.", "type":"AuthError", "errcode":11}}'
 
     #reconstruct signature
-    secret = api_tokens[post.key]
+    secret = api_tokens[str(post.key)]
     timestamp = post.timestamp
     user = post.user
-    signature = hashlib.md5('%s&%s&%s'%(timestamp,db[user],secret)).hexdigest()
+    signature = hashlib.md5('%s&%s&%s'%(timestamp,db[str(user)],secret)).hexdigest()
     if signature != post.signature:
         return '{"error":true,"data":{"msg":"Signature does not match." "type":"AuthError", "errcode":12}}'
-    return '{"error":false,"data:{"clipboard":"%s"}}'%rd.get(user)
+    return '{"error":false,"data":{"clipboard":"%s"}}'%rd.get(user)
 
 if __name__ == "__main__":
     web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
