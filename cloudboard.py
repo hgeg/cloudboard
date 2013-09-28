@@ -94,7 +94,7 @@ class Getter:
     signature = hashlib.md5('%s&%s&%s'%(timestamp,db[str(user)],secret)).hexdigest()
     if signature != post.signature:
         return '{"error":true,"data":{"msg":"Signature does not match." "type":"AuthError", "errcode":12}}'
-    return '{"error":false,"data":{"clipboard":"%s"}}'%rd.get(user)
+    return rd.get(user)
 
 if __name__ == "__main__":
     web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
