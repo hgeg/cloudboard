@@ -1,12 +1,19 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 import time,json
-import requests, hashlib
-import threading
+import requests,hashlib
+import threading,uuid
 from Pubnub import Pubnub
 
 import pyperclip
 
 USER = "Hgeg"
 PASS = "sokoban"
+UNIQUEID = "cboard-PC-%s"%uuid.getnode()
+
+clipDict = {}
+clipText = ''
+clipLen  = 0
 
 pubnub = Pubnub(
         "pub-56806acb-9c46-4008-b8cb-899561b7a762",  ## PUBLISH_KEY
@@ -16,26 +23,42 @@ pubnub = Pubnub(
 )
     
 def setGlobal(content):
-
+  try: 
     API_KEY = 'H4vlwkm8tvO8'
     API_SECRET ='UZepT6F8abA80DK1ilCz'
     timestamp = int(time.time())
 
     payload = {
-      'data': content,
+      'data': content.decode('utf-8'),
       'user': USER,
       'key': API_KEY,
       'timestamp': timestamp,
-      'signature': hashlib.md5('%s&%s&%s'%(timestamp,hashlib.md5(PASS).hexdigest(),API_SECRET)).hexdigest()
+      'signature': hashlib.md5('%s&%s&%s'%(timestamp,hashlib.md5(PASS).hexdigest(),API_SECRET)).hexdigest(),
+      'uniqueID':UNIQUEID
       }
-
-    r = requests.post('http://hgeg.io/cloudboard/set/',params=payload)
-    with open('dump.html','w') as f: f.write(r.text)
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    r = requests.post('http://hgeg.io/cloudboard/set/',data=json.dumps(payload),headers=headers)
+    with open('dump.html','w') as f: f.write(r.text.encode('utf-8'))
+  except: pass
 
 def setLocal(message):
-  print 'push received with message: ',message
-  pyperclip.copy(message['text'])
-  print "cboard:",pyperclip.paste()
+  try:
+    if message['uniqueID'] == UNIQUEID: return 
+    API_KEY = 'H4vlwkm8tvO8'
+    API_SECRET ='UZepT6F8abA80DK1ilCz'
+    timestamp = int(time.time())
+
+    payload = {
+      'user': USER,
+      'key': API_KEY,
+      'timestamp': timestamp,
+      'signature': hashlib.md5('%s&%s&%s'%(timestamp,hashlib.md5(PASS).hexdigest(),API_SECRET)).hexdigest(),
+      'uniqueID':UNIQUEID
+      }
+
+    r = requests.post('http://hgeg.io/cloudboard/get/',params=payload)
+    pyperclip.copy(unicode(r.text).encode('utf-8'))
+  except: pass
 
 def subscribe():
   while True:
@@ -67,12 +90,12 @@ class ClipboardWatcher(threading.Thread):
         self._stopping = True
 
 def main():
-    watcher = ClipboardWatcher(setGlobal,5.0)
+    setLocal({'uniqueID':'None'})
+    watcher = ClipboardWatcher(setGlobal,0.5)
     watcher.start()
     while True:
         try:
-            print "Waiting for changed clipboard..."
-            time.sleep(10)
+            time.sleep(1)
         except KeyboardInterrupt:
             watcher.stop()
             break

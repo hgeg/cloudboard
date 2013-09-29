@@ -1,1 +1,534 @@
-{"error":false,"data:{"clipboard":"kopyala"}}
+{"error":false,"data:{"clipboard":"Just set the
+
+android:maxLines = "AN_INTEGER"
+
+android:scrollbars = "vertical"
+properties of your TextView in your layout's xml file.
+
+Then use:
+
+yourTextView.setMovementMethod(new ScrollingMovementMethod())
+
+in your code.
+
+Bingo, it scrolls automatically without any issues.
+
+share|edit|flag
+edited Apr 10 '12 at 3:18
+
+Josh
+6,08642370	
+answered Jul 15 '10 at 14:07
+
+Amit Chintawar
+3,6301610
+2	
+ 	
+Thanks a lot Amit! – Muhammad Maqsoodur Rehman Jul 16 '10 at 8:14
+9	
+ 	
+But surely maxLines requires you to enter an arbitrary number; this isn't something that will work for every screen size and font size? I find it simpler to just wrap it with a ScrollView, meaning I don't have to add any further XML attributes or code (like setting the movement method). – Christopher Orr Dec 19 '10 at 22:57
+2	
+ 	
+@Christopher, ScrollView requires 'android:layout_height' too. – Regex Rookie Mar 4 '11 at 16:39
+4	
+ 	
+@Regex: Well yes. Either you let the ScrollView take up as much space as it needs (e.g. via the android:fillViewport attribute), or you set the specific size you want. Using maxLines should not be used to set sizes of UI elements, so that is no solution. – Christopher Orr Mar 5 '11 at 12:18
+1	
+ 	
+Hello. For me this is not a solution (as I thought it is). I have to create all the layout programatically here and when using just a TextView with ScrollMovementMethod(), it scrolls like a 3 px/scroll and very jerky. This TextView is in LineraLayout which is within a ScrollView. When I try to surround thhis TextView with another ScrollView - how can I set the height for it??? Remember - I'm not using any XML here...and ScrollView does not have a .setHeight() method. Any suggestion? – shadyyx May 14 '11 at 15:24
+add / show 14 more comments
+up vote
+15
+down vote
+Stumbled upon this by chance: I might be waking up a zombie here. But to answer this question you can either:
+1. Surround the TextView by a ScrollView OR
+2. set the Movement method to ScrollingMovementMethod.getInstance();
+
+share|edit|flag
+answered Jan 19 '10 at 10:04
+
+Samuh
+13.8k136893
+add comment
+up vote
+56
+down vote
+All that is really necessary is the setMovementMethod(). Heres an exmple using a LinearLayout.
+
+main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:id="@+id/tv1"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:text="@string/hello"
+    />
+</LinearLayout>
+WordExtractTest.java
+public class WordExtractTest extends Activity {
+
+    TextView tv1;
+
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        tv1 = (TextView)findViewById(R.id.tv1);
+
+        loadDoc();
+    }
+
+    private void loadDoc(){
+
+        String s = "";
+
+        for(int x=0;x<=100;x++){
+            s += "Line: "+String.valueOf(x)+"\n";
+        }
+
+        tv1.setMovementMethod(new ScrollingMovementMethod());
+
+        tv1.setText(s);
+
+    }
+}
+share|edit|flag
+answered Apr 12 '11 at 17:23
+
+EddieB
+1,8311011
+ 	
+ 	
+Man this works, thanks – Ramji Jun 14 '11 at 9:03
+4	
+ 	
++1 for the complete example. – Peter Majeed Oct 7 '11 at 4:09
+1	
+ 	
+Is there any way to set this property in XML? I wonder why they would leave out that option. – Thalur Nov 22 '11 at 16:16
+ 	
+ 	
+It works but Is der any way to refresh it after scrolling? i mean after scrolling the TextView i am going to change text on it, but its position remains scrolled even if it is not required. its bcose previously i had applied scroll... – Nirav Dangi Nov 23 '11 at 10:03
+1	
+ 	
+no scroll bars, and scrolling is clunky compared to the ScrollView method. – Jeffrey Blattman Sep 14 '12 at 21:59
+add / show 3 more comments
+up vote
+4
+down vote
+I didn't find TextView scrolling to support the 'fling' gesture, where it continues scrolling after a flick up or down. I ended up implementing that myself because I didn't want to use a ScrollView for various reasons, and there didn't seem to be a MovementMethod that both allowed me to select text and click on links.
+
+share|edit|flag
+edited Jun 30 '11 at 14:15
+
+answered May 15 '11 at 15:59
+
+android.weasel
+549415
+add comment
+up vote
+41
+down vote
+This is how I did it purely in XML:
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <ScrollView
+    android:id="@+id/SCROLLER_ID"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
+    android:fillViewport="true">
+
+        <TextView
+        android:id="@+id/TEXT_STATUS_ID"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"/>
+
+    </ScrollView>
+
+</LinearLayout>
+NOTES:
+
+1) android:fillViewport="true" combined with android:layout_weight="1.0" will make the textview take up all available space.
+
+2) When defining the Scrollview, DO NOT specify android:layout_height="fill_parent" otherwise the scrollview doesn't work ! (This has caused me to waste an hour just now! FFS)
+
+PRO TIP:
+
+to programmatically scroll to the bottom after appending text, use this:
+
+mTextStatus = (TextView) findViewById(R.id.TEXT_STATUS_ID);
+mScrollView = (ScrollView) findViewById(R.id.SCROLLER_ID);
+
+private void scrollToBottom()
+{
+    mScrollView.post(new Runnable()
+    { 
+        public void run()
+        { 
+            mScrollView.smoothScrollTo(0, mTextStatus.getBottom());
+        } 
+    });
+}
+share|edit|flag
+answered Dec 16 '11 at 9:16
+
+Someone Somewhere
+6,41413867
+ 	
+ 	
+There's no need to use mTextView.getBottom(), just use the method mScrollView.fullScroll(View.FOCUS_DOWN) as it is a part of the ScrollView API. See here and here for more info. – Chuong Sep 11 at 19:59
+add comment
+up vote
+6
+down vote
+Best way I found:
+
+Replace the TextView with an EditText with these extra attributes:
+
+android:background="@null"
+android:editable="false"
+android:cursorVisible="false"
+No need for wrapping in ScrollView.
+
+share|edit|flag
+answered Feb 20 '12 at 15:35
+
+Valentin Galea
+611417
+3	
+ 	
+android:editable and android:cursorVisible are deprecated – Jason May 10 '12 at 0:10
+1	
+ 	
+Easily the best and most appropriate answer, especially considering that EditText is a TextView subclass and the question is how to make the textview scrollable, not how to work around the problem. Would vote up twice if I could :) – Justin Buser Jul 8 '12 at 15:38
+1	
+ 	
+@JustinBuser Couldn't disagree more. :) It's purely serendipitous that this works, and there's no guarantee it will in future versions of Android. If you want scrolling, use the scrolling tools that Android provides. ScrollView is the correct way to go. – Madbreaks Oct 24 '12 at 0:53
+ 	
+ 	
+@Madbreaks There is nothing "serendipitous" about it, EditText IS a TextView with a few added methods and overrides that is specifically tailored to accommodate varying length text. In particular EditText overrides the return value for the TextView getDefaultMovementMethod function. The default implementation returns NULL, EditText basically does the same thing all these other answers are suggesting. As far as using the tools that Android provides is concerned, the EditText class is far less likely to become deprecated than any of the other methods found in these answers. – Justin Buser Oct 27 '12 at 14:32
+1	
+ 	
+@JustinBuser My problem with that though is you're depending on the default behavior of EditText, that is what I meant may very well change down the road (not at all that EditText would be deprecated). You can argue that, but again, the idea is to use components and features that are appropriate for the task at hand. ScrollView was explicitly designed to encompass scrolling. I always try to, and always suggest others use the right tool for the job. There are almost always multiple approaches to any given programming problem. Anyway, thanks for the thoughtful response. – Madbreaks Oct 29 '12 at 17:57
+add comment
+up vote
+5
+down vote
+This is "How to apply ScrollBar to your TextView", using only XML?
+
+First, you need to take Textview control in main.xml file and write some text into it ... like this:
+
+<TextView 
+    android:id="@+id/TEXT" 
+    android:layout_height="wrap_content" 
+    android:layout_width="wrap_content" 
+    android:text="@string/long_text"/>
+Next,place the text view control in between the scrollview to display the scroll bar for this text:
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:orientation="vertical" 
+    android:layout_height="wrap_content" 
+    android:layout_width="fill_parent"> 
+
+    <ScrollView 
+        android:id="@+id/ScrollView01" 
+        android:layout_height="150px" 
+        android:layout_width="fill_parent"> 
+
+        <TextView 
+            android:id="@+id/TEXT" 
+            android:layout_height="wrap_content" 
+            android:layout_width="wrap_content" 
+            android:text="@string/long_text"/> 
+
+    </ScrollView>
+</RelativeLayout>
+That's it...
+
+share|edit|flag
+edited Jun 6 '12 at 8:00
+
+Perception
+35.3k72454	
+answered Jun 6 '12 at 7:49
+
+mOmO
+7017
+1	
+ 	
+Why even write this? This is an almost identical, albeit less correct, version of an answer that was posted over 6 months before you wrote it. – Justin Buser Jul 8 '12 at 14:44
+ 	
+ 	
+Helped me solve my issue! – Brian Reinhold Mar 7 at 21:46
+add comment
+up vote
+3
+down vote
+when you done with scrollable add this line to view last line when you enter anything in view
+
+((ScrollView) findViewById(R.id.TableScroller)).fullScroll(View.FOCUS_DOWN);
+share|edit|flag
+answered Jul 4 '12 at 13:35
+
+TechEnd
+2,99332673
+ 	
+ 	
+dude,tablescroller is a view that was identified by the id attribute from the XML that was processed in .. u just try it.. it ll work fine.. its works fr me.. – TechEnd Jul 9 '12 at 4:15
+add comment
+up vote
+3
+down vote
+If you don't want to use the EditText solution then you might have better luck with:
+
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.yourLayout);
+    (TextView)findViewById(R.id.yourTextViewId).setMovementMethod(ArrowKeyMovementMethod.getInstance());
+}
+share|edit|flag
+answered Oct 27 '12 at 14:38
+
+Justin Buser
+1,137714
+add comment
+up vote
+4
+down vote
+This will provide smooth scrolling text with a scroll bar.
+
+ScrollView scroller = new ScrollView(this);
+TextView tv = new TextView(this);
+tv.setText(R.string.my_text);
+scroller.addView(tv);
+share|edit|flag
+answered Dec 20 '12 at 12:29
+
+IT-Dan
+1826
+ 	
+ 	
+Enables blue animation. Best answer here IMO. – parion Apr 22 at 4:28
+add comment
+up vote
+2
+down vote
+If you want text to be scrolled within the textview, then you can follow the following:
+
+First you should have to subclass textview.
+
+and then use that .
+
+Following is an example of subclassed textview.
+
+public class AutoScrollableTextView extends TextView {
+
+
+    public AutoScrollableTextView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    setEllipsize(TruncateAt.MARQUEE);
+    setMarqueeRepeatLimit(-1);
+    setSingleLine();
+    setHorizontallyScrolling(true);
+    }
+
+    public AutoScrollableTextView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    setEllipsize(TruncateAt.MARQUEE);
+    setMarqueeRepeatLimit(-1);
+    setSingleLine();
+    setHorizontallyScrolling(true);
+    }
+
+    public AutoScrollableTextView(Context context) {
+        super(context);   
+    setEllipsize(TruncateAt.MARQUEE);
+    setMarqueeRepeatLimit(-1);
+    setSingleLine();
+    setHorizontallyScrolling(true);
+
+    }
+    @Override
+    protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
+        if(focused)
+            super.onFocusChanged(focused, direction, previouslyFocusedRect);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean focused) {
+        if(focused)
+            super.onWindowFocusChanged(focused);
+    }
+
+
+    @Override
+    public boolean isFocused() {
+        return true;
+    }
+}
+Now, you have to use that in the xml in this way,
+
+ <com.yourpackagename.AutoScrollableTextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"                    
+                android:text="This is very very long text to be scrolled"
+                />
+Thats it.
+
+share|edit|flag
+edited Dec 27 '12 at 11:04
+
+answered Dec 27 '12 at 10:06
+
+Dipendra
+1178
+add comment
+up vote
+1
+down vote
+This is my very first code contribution to Stack Overflow, and only my 2nd answer, but this took me a long time to figure out, so I'm thinking that it might be helpful to someone else, although it does seem obvious now. The "pro tip" above from Someone Somewhere (Making TextView Scrollable in Android) works great, however, what if you're dynamically adding text to the ScrollView and would like to automatically scroll to the bottom after an append only when the user is at the bottom of the ScrollView? (Perhaps because if the user has scrolled up to read something you don't want to automatically reset to the bottom during an append, which would be annoying.)
+
+Anyway, here it is:
+
+if ((mTextStatus.getMeasuredHeight() - mScrollView.getScrollY()) <=
+        (mScrollView.getHeight() + mTextStatus.getLineHeight())) {
+    scrollToBottom();
+}
+The mTextStatus.getLineHeight() will make it so that you don't scrollToBottom() if the user is within one line from the end of the ScrollView. I hope this helps!
+
+share|edit|flag
+answered May 20 at 16:46
+
+Mark Cramer
+389
+add comment
+up vote
+0
+down vote
+Make your textview just adding this
+
+TextView textview= (TextView) findViewById(R.id.your_textview_id);
+textview.setMovementMethod(new ScrollingMovementMethod());
+share|edit|flag
+edited Jul 26 at 2:23
+
+Keith Smiley
+3,53621833	
+answered Jul 26 at 1:59
+
+matasoy
+1
+add comment
+Your Answer
+
+  community wiki
+
+Not the answer you're looking for? Browse other questions tagged android scroll textview or ask your own question.
+tagged
+android × 390895
+scroll × 4595
+textview × 3671
+asked
+3 years ago
+viewed
+112989 times
+active
+2 months ago
+Mobile Web-Developer (m/f)
+Geil,Danke! GmbH
+Berlin, Deutschland
+Sr. Manager Software Development, Prime
+Amazon
+Seattle, WA / relocation
+Back End Developer
+Chirp
+Long Beach, CA / remote
+Linked
+0 Non-Editable scrollable TextView
+0 Android vertical scrolling doesn't work
+7 Android TextView with scrollbars and maxHeight
+0 Android EditText Vertical Scrolling Problem
+2 Making TextView scrollable without knowing max lines
+0 android - how to make a textview scroll?
+1 Android “scroll” Text in TextView
+2 Scrollable TextView in Android Widget
+0 Main.xml in Android
+0 TextView within a scroll view
+see more linked questions…
+Related
+345 How do I center text horizontally and vertical in a TextView in Android?
+1 Android: How to make current layout with scrollable text view?
+2 Making TextView scrollable without knowing max lines
+3 How to make the two textviews invisible on the touch in android
+1 how to add dynamic textview and ontouchlistners android
+0 Reset TextView position (scrollable) on new text load
+0 how to make the scrolling of TextView looks more natural in android?
+0 Textview scrollable and clickable
+1 Non scrollable textview in android
+0 Set the textView visible to the top of the containing text (scrollable textView)
+question feed
+about help blog chat data legal privacy policy jobs advertising info mobile contact us feedback
+TECHNOLOGY	 LIFE / ARTS	 CULTURE / RECREATION	 SCIENCE	 OTHER
+Stack Overflow
+Server Fault
+Super User
+Web Applications
+Ask Ubuntu
+Webmasters
+Game Development
+TeX - LaTeX
+Programmers
+Unix & Linux
+Ask Different (Apple)
+WordPress Answers
+Geographic Information Systems
+Electrical Engineering
+Android Enthusiasts
+IT Security
+Database Administrators
+Drupal Answers
+SharePoint
+User Experience
+Mathematica
+more (13)
+Photography
+Science Fiction & Fantasy
+Seasoned Advice (cooking)
+Home Improvement
+more (13)
+English Language & Usage
+Skeptics
+Mi Yodeya (Judaism)
+Travel
+Christianity
+Arqade (gaming)
+Bicycles
+Role-playing Games
+more (21)
+Mathematics
+Cross Validated (stats)
+Theoretical Computer Science
+Physics
+MathOverflow
+more (7)
+Stack Apps
+Meta Stack Overflow
+Area 51
+Stack Overflow Careers
+"}}
