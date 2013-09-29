@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="CBViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oWo-cf-PHV"/>
+                        <viewControllerLayoutGuide type="bottom" id="xl2-WQ-kZD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT5-pu-MPj">
+                                <rect key="frame" x="0.0" y="21" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.16237037539999999" green="0.62014911800000005" blue="0.95448022960000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="25"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Cloudboard" id="9q5-oR-Wx2"/>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" bouncesZoom="NO" keyboardDismissMode="interactive" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXm-oX-Sr8">
+                                <rect key="frame" x="0.0" y="66" width="768" height="915"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swP-7i-kjK">
+                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="7TJ-21-vHv"/>
+                                    <constraint firstAttribute="height" constant="44" id="S03-r3-QRY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="push-to-cloud-ipad.png"/>
+                                <connections>
+                                    <action selector="push:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yye-uq-agw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jT5-pu-MPj" secondAttribute="trailing" id="1dK-qP-FY0"/>
+                            <constraint firstItem="xl2-WQ-kZD" firstAttribute="top" secondItem="swP-7i-kjK" secondAttribute="bottom" id="4qu-vp-csf"/>
+                            <constraint firstAttribute="trailing" secondItem="swP-7i-kjK" secondAttribute="trailing" id="57c-oL-dsu"/>
+                            <constraint firstItem="swP-7i-kjK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KvD-I0-g5C"/>
+                            <constraint firstItem="xl2-WQ-kZD" firstAttribute="top" secondItem="swP-7i-kjK" secondAttribute="bottom" id="OS0-Ak-mWy"/>
+                            <constraint firstItem="jT5-pu-MPj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gN1-33-tIu"/>
+                            <constraint firstItem="swP-7i-kjK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mlN-vM-f0C"/>
+                            <constraint firstAttribute="trailing" secondItem="swP-7i-kjK" secondAttribute="trailing" id="vKQ-5H-Xgt"/>
+                            <constraint firstItem="jT5-pu-MPj" firstAttribute="top" secondItem="oWo-cf-PHV" secondAttribute="bottom" id="vwL-k7-sgq"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="clipView" destination="IXm-oX-Sr8" id="KGe-4y-o80"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="push-to-cloud-ipad.png" width="1536" height="88"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Cloudboard/Cloudboard.iml" filepath="$PROJECT_DIR$/Cloudboard/Cloudboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CloudboardProject.iml" filepath="$PROJECT_DIR$/CloudboardProject.iml" />
+    </modules>
+  </component>
+</project>
+
