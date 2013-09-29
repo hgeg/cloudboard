@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import web, redis, shelve, hashlib, json
+import web, redis, shelve, hashlib, json,urllib2
 from Pubnub import Pubnub
 import time
 
@@ -42,34 +42,27 @@ class Setter:
     #initialize data containers
     rd = redis.StrictRedis(host='localhost', port=6379, db=0)
     db = shelve.open('auth')
-    post = web.input()
+    post = json.loads(web.data())
     
     #check timeframe:
-    if int(time.time()) > int(post.timestamp) + 120:
+    if int(time.time()) > int(post['timestamp']) + 120:
       return '{"error":true,"data":{"msg":"Request is too old.", "type":"AuthError", "errcode":11}}'
 
     #reconstruct signature
-    secret = api_tokens[str(post.key)]
-    timestamp = post.timestamp
-    user = post.user
+    secret = api_tokens[str(post['key'])]
+    timestamp = post['timestamp']
+    user = post['user']
     signature = hashlib.md5('%s&%s&%s'%(timestamp,db[str(user)],secret)).hexdigest()
-    if signature != post.signature:
+    if signature != post['signature']:
         return '{"error":true,"data":{"msg":"Signature does not match." "type":"AuthError", "errcode":12}}'
-    rd.set(user,post.data)
-    p=0
-    packetlen =  len(post.data)/100
-    for e in xrange(packetlen+1):
-      pubnub.publish({
-        'channel' : user,
-        'message' : {
-          'text' : post.data[p:(e+1)*100],
-          'timestamp': timestamp,
-          'packetlen': packetlen,
-          'packetindex': e,
-          'uniqueID': post.uniqueID
-        }
-      })
-      p = 100*(e+1)
+    rd.set(user,post['data'].encode('utf-8'))
+    pubnub.publish({
+      'channel' : user,
+      'message' : {
+        'timestamp': timestamp,
+        'uniqueID': post['uniqueID']
+      }
+    })
     return '{"error":false,"data:{"clipboard":"%s"}}'%rd.get(user)
       
 
