@@ -6,20 +6,17 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Hashtable;
 
@@ -29,47 +26,6 @@ public class MainActivity extends Activity {
     Pubnub pubnub  = new Pubnub("pub-56806acb-9c46-4008-b8cb-899561b7a762","sub-26001c28-a260-11e1-9b23-0916190a0759","",false);
     String channel = "Hgeg";
     public static ClipboardManager clipboard;
-
-
-
-    private void notifyUser(Object message) {
-        try {
-            if (message instanceof JSONObject) {
-                final JSONObject obj = (JSONObject) message;
-                this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), obj.toString(),
-                                Toast.LENGTH_LONG).show();
-
-                        Log.i("Received msg : ", String.valueOf(obj));
-                    }
-                });
-
-            } else if (message instanceof String) {
-                final String obj = (String) message;
-                this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), obj,
-                                Toast.LENGTH_LONG).show();
-                        Log.i("Received msg : ", obj.toString());
-                    }
-                });
-
-            } else if (message instanceof JSONArray) {
-                final JSONArray obj = (JSONArray) message;
-                this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), obj.toString(),
-                                Toast.LENGTH_LONG).show();
-                        Log.i("Received msg : ", obj.toString());
-                    }
-                });
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +37,13 @@ public class MainActivity extends Activity {
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 pubnub.disconnectAndResubscribe();
-
             }
 
         }, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         TextView clipView = (TextView) this.findViewById(R.id.clipView);
         clipView.setMovementMethod(new ScrollingMovementMethod());
+
 
         subscribe();
 
@@ -103,6 +59,11 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume(){
+        SharedPreferences prefs = getSharedPreferences("clip",MODE_PRIVATE);
+        String clipData = prefs.getString("data","");
+
+        TextView clipView = (TextView) this.findViewById(R.id.clipView);
+        clipView.setText(clipData);
         super.onResume();
         Synchronize s = new Synchronize();
         s.execute();
@@ -118,11 +79,11 @@ public class MainActivity extends Activity {
                 public void connectCallback(String channel,Object message) {}
                 @Override
                 public void disconnectCallback(String channel,Object message) {}
-
                 @Override
                 public void reconnectCallback(String channel,Object message) {}
                 @Override
                 public void successCallback(String channel,Object message) {
+                    System.out.println(message);
                     Synchronize s = new Synchronize();
                     s.execute();
                 }
@@ -133,6 +94,22 @@ public class MainActivity extends Activity {
         }
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_push:
+                TextView clipView = (TextView) this.findViewById(R.id.clipView);
+                clipView.setText(this.clipboard.getText());
+                Push p = new Push();
+                p.execute();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 }
 

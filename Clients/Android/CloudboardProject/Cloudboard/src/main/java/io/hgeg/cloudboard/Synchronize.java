@@ -1,11 +1,13 @@
 package io.hgeg.cloudboard;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.*;
-
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -41,7 +43,7 @@ public class Synchronize extends AsyncTask<Void, Void, String> {
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
 
             request = new OutputStreamWriter(connection.getOutputStream());
             request.write(parameters);
@@ -81,14 +83,20 @@ public class Synchronize extends AsyncTask<Void, Void, String> {
     }
 
     protected void onPostExecute(String data) {
-        SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
         TextView clipView = (TextView) this.context.findViewById(R.id.clipView);
         if(!this.exception) {
-            clipView.setText(data);
-            ClipData clip = ClipData.newPlainText("cloudboard_data", data);
-            clipboard.setPrimaryClip(clip);
-            Toast.makeText(this.context, "Clipboard Updated!", Toast.LENGTH_LONG).show();
+
+            SharedPreferences prefs = this.context.getSharedPreferences("clip", Context.MODE_PRIVATE);
+
+            if(!prefs.getString("data","").equals(data)) {
+                clipView.setText(data);
+                ClipData clip = ClipData.newPlainText("io.hgeg.cloudboard.clipboard.data", data);
+                clipboard.setPrimaryClip(clip);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("data",data);
+                editor.commit();
+                Toast.makeText(this.context, "Clipboard updated!", Toast.LENGTH_LONG).show();
+            }
         }else {
             clipView.setText("");
             Toast.makeText(this.context, "Error!", Toast.LENGTH_LONG).show();
