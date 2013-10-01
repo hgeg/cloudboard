@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.*;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,13 +17,15 @@ import java.security.MessageDigest;
 /**
  * Created by can on 9/30/13.
  */
-public class Synchronize extends AsyncTask<Activity, Void, String> {
+public class Synchronize extends AsyncTask<Void, Void, String> {
 
     private boolean exception;
     private Activity context;
+    private ClipboardManager clipboard;
 
-    protected String doInBackground(Activity... contexts) {
-        this.context = contexts[0];
+    protected String doInBackground(Void... none) {
+        this.context = MainActivity.model;
+        this.clipboard = MainActivity.clipboard;
         HttpURLConnection connection;
         OutputStreamWriter request = null;
 
@@ -70,15 +74,20 @@ public class Synchronize extends AsyncTask<Activity, Void, String> {
             MessageDigest md = MessageDigest.getInstance("MD5"); byte[] hash = md.digest(message.getBytes("UTF-8"));
             //converting byte array to Hexadecimal
             StringBuilder sb = new StringBuilder(2*hash.length);
-            for(byte b : hash){ sb.append(String.format("%02x", b&0xff)); } digest = sb.toString();
+            for(byte b : hash){ sb.append(String.format("%02x", b&0xff)); }
+            digest = sb.toString();
         } catch (Exception e) {}
         return digest;
     }
 
     protected void onPostExecute(String data) {
+        SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         TextView clipView = (TextView) this.context.findViewById(R.id.clipView);
         if(!this.exception) {
             clipView.setText(data);
+            ClipData clip = ClipData.newPlainText("cloudboard_data", data);
+            clipboard.setPrimaryClip(clip);
             Toast.makeText(this.context, "Clipboard Updated!", Toast.LENGTH_LONG).show();
         }else {
             clipView.setText("");
