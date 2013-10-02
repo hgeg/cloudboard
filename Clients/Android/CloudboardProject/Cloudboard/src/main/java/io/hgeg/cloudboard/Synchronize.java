@@ -1,7 +1,6 @@
 package io.hgeg.cloudboard;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -90,8 +89,7 @@ public class Synchronize extends AsyncTask<Void, Void, String> {
 
             if(!prefs.getString("data","").equals(data)) {
                 clipView.setText(data);
-                ClipData clip = ClipData.newPlainText("io.hgeg.cloudboard.clipboard.data", data);
-                clipboard.setPrimaryClip(clip);
+                MainActivity.setClipText(data);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("data",data);
                 editor.commit();

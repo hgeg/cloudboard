@@ -2,6 +2,7 @@ package io.hgeg.cloudboard;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +35,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         model = this;
         clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        clipboard.addPrimaryClipChangedListener(new SyncListener());
         this.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent intent) {
@@ -92,22 +95,48 @@ public class MainActivity extends Activity {
             });
         } catch (Exception e) {
         }
+    }
 
+    public void push() {
+        TextView clipView = (TextView) this.findViewById(R.id.clipView);
+        clipView.setText(MainActivity.getClipText());
+        Push p = new Push();
+        p.execute();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_push:
-                TextView clipView = (TextView) this.findViewById(R.id.clipView);
-                clipView.setText(this.clipboard.getText());
-                Push p = new Push();
-                p.execute();
+            case R.id.action_settings:
+                Intent settings = new Intent();
+                settings.setClassName("io.hgeg.cloudboard", "io.hgeg.cloudboard.SettingsActivity");
+                //settings.putExtra("com.android.samples.SpecialValue", "Hello, Joe!");
+                startActivity(settings);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
+    public static String getClipText() {
+        String textToPaste = "";
+        if (clipboard.hasPrimaryClip()) {
+            ClipData clip = clipboard.getPrimaryClip();
+            // if you need text data only, use:
+            if (clip.getDescription().hasMimeType("text/plain"))
+                textToPaste = clip.getItemAt(0).getText().toString();
+        }
+
+        if (!TextUtils.isEmpty(textToPaste))
+            return textToPaste;
+        else return "";
+    }
+
+    public static void setClipText(String clipText) {
+        clipboard.setPrimaryClip(ClipData.newPlainText("io.hgeg.cloudboard.clipdata",clipText));
     }
 
 
