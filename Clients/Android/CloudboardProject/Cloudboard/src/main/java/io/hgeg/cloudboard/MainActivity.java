@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -62,12 +63,12 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume(){
+        super.onResume();
         SharedPreferences prefs = getSharedPreferences("clip",MODE_PRIVATE);
         String clipData = prefs.getString("data","");
 
         TextView clipView = (TextView) this.findViewById(R.id.clipView);
         clipView.setText(clipData);
-        super.onResume();
         Synchronize s = new Synchronize();
         s.execute();
     }
@@ -79,14 +80,16 @@ public class MainActivity extends Activity {
         try {
             pubnub.subscribe(args, new Callback() {
                 @Override
-                public void connectCallback(String channel,Object message) {}
+                public void connectCallback(String channel,Object message) {
+                       Log.e("cloudboard",message.toString());
+                }
                 @Override
                 public void disconnectCallback(String channel,Object message) {}
                 @Override
                 public void reconnectCallback(String channel,Object message) {}
                 @Override
                 public void successCallback(String channel,Object message) {
-                    System.out.println(message);
+                    Log.e("cloudboard",message.toString());
                     Synchronize s = new Synchronize();
                     s.execute();
                 }
@@ -127,9 +130,8 @@ public class MainActivity extends Activity {
             ClipData clip = clipboard.getPrimaryClip();
             // if you need text data only, use:
             if (clip.getDescription().hasMimeType("text/plain"))
-                textToPaste = clip.getItemAt(0).getText().toString();
+                textToPaste = clip.getItemAt(0).getText().toString().replace("\n", "\\n").replace("\"", "\\\"");
         }
-
         if (!TextUtils.isEmpty(textToPaste))
             return textToPaste;
         else return "";

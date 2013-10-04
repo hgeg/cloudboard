@@ -31,7 +31,7 @@ public class Push extends AsyncTask<Void, Void, String> {
         OutputStreamWriter request = null;
 
         long timestamp = System.currentTimeMillis()/1000;
-        String data = clipboard.getText().toString().replace("\n","\\n").replace("\"","\\\"");
+        String data = MainActivity.getClipText();
         String raw_sig = timestamp+"&"+md5("sokoban")+"&"+"UZepT6F8abA80DK1ilCz";
         String parameters = "{\"user\":\"Hgeg\"," +
                             " \"timestamp\":"+ timestamp + "," +
@@ -61,7 +61,8 @@ public class Push extends AsyncTask<Void, Void, String> {
     public static String md5(String message) {
         String digest = null;
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5"); byte[] hash = md.digest(message.getBytes("UTF-8"));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
             //converting byte array to Hexadecimal
             StringBuilder sb = new StringBuilder(2*hash.length);
             for(byte b : hash){ sb.append(String.format("%02x", b&0xff)); }
