@@ -33,8 +33,11 @@
 
 
         <service
-            android:name=".SyncService"
-            android:exported="false"/>
+            android:name="CloudSyncService"
+            android:icon="@drawable/service"
+            android:label="@string/Cloudboard"
+            >
+        </service>
 
     </application>
 

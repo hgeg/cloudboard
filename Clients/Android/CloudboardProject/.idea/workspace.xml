@@ -35,10 +35,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e77ea332-ebfe-4356-9ec8-300688034da3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../iOS/Cloudboard.xcodeproj/project.xcworkspace/xcuserdata/can.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/../../iOS/Cloudboard.xcodeproj/project.xcworkspace/xcuserdata/can.xcuserdatad/UserInterfaceState.xcuserstate" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-hdpi/service.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-mdpi/service.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-xhdpi/service.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-xxhdpi/service.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/CloudSyncService.java" afterPath="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/CloudSyncService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/MainActivity.java" afterPath="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Push.java" afterPath="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Push.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../PC/dump.html" afterPath="$PROJECT_DIR$/../../PC/dump.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cloudboard/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/Cloudboard/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Cloudboard.iws" />
@@ -57,7 +61,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -94,6 +97,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -103,52 +107,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="text-editor">
-            <state line="19" column="31" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="555">
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/MainActivity.java">
+      <file leaf-file-name="CloudSyncService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/CloudSyncService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="25" selection-start="2778" selection-end="2778" vertical-scroll-proportion="0.49019608" vertical-offset="810" max-vertical-offset="1965">
-              <folding>
-                <element signature="e#1355#1543#0" expanded="true" />
-                <element signature="e#1531#1532#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Synchronize.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Synchronize.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="0" selection-start="3772" selection-end="3772" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1455">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SyncListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SyncListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="34" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Push.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Push.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="48" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.0" vertical-offset="296" max-vertical-offset="1305">
+            <state line="19" column="25" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="525">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -156,22 +118,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_settings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/res/layout/activity_settings.xml">
-          <provider editor-type-id="text-editor">
-            <state line="15" column="24" selection-start="453" selection-end="453" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="645">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="131" column="10" selection-start="4406" selection-end="4406" vertical-scroll-proportion="0.5477387" vertical-offset="1492" max-vertical-offset="1890">
               <folding />
             </state>
           </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/res/menu/main.xml">
+      <file leaf-file-name="Synchronize.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Synchronize.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="40" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="180">
+            <state line="27" column="42" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1455">
               <folding />
             </state>
           </provider>
@@ -180,7 +139,18 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="35" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="705">
+            <state line="29" column="41" selection-start="960" selection-end="960" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+              <folding>
+                <element signature="e#1211#1231#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SyncListener.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SyncListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="9" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
               <folding />
             </state>
           </provider>
@@ -189,7 +159,7 @@
       <file leaf-file-name="SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="0" selection-start="453" selection-end="453" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
+            <state line="8" column="13" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
               <folding />
             </state>
           </provider>
@@ -567,7 +537,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/ApiRequest.java" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/ClipReceiver.java" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/PubnubService.java" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Callback.java" />
@@ -577,11 +546,12 @@
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SyncListener.java" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SettingsActivity.java" />
-        <option value="$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/res/layout/activity_settings.xml" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Synchronize.java" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Push.java" />
+        <option value="$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/CloudSyncService.java" />
         <option value="$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/MainActivity.java" />
       </list>
     </option>
@@ -722,66 +692,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CloudboardProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CloudboardProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cloudboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CloudboardProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CloudboardProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Cloudboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -794,8 +704,8 @@
       </pane>
       <pane id="Scope">
         <subPane subId="Problems" />
-        <subPane subId="Production" />
         <subPane subId="Tests" />
+        <subPane subId="Production" />
         <subPane subId="Project Files" />
       </pane>
     </panes>
@@ -821,17 +731,17 @@
       <recent name="io.hgeg.cloudboard" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Cloudboard/libs" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-xxhdpi" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-xhdpi" />
-      <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-hdpi" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-mdpi" />
+      <recent name="$PROJECT_DIR$/Cloudboard/libs" />
+      <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-hdpi" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-hdpi" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-xxhdpi" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-xhdpi" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-mdpi" />
-      <recent name="$PROJECT_DIR$/Cloudboard/src/main/res/drawable-hdpi" />
       <recent name="$PROJECT_DIR$/Cloudboard/src/main/res" />
     </key>
   </component>
@@ -843,25 +753,6 @@
       <setting name="params" value="" />
       <setting name="workDir" value="file://$PROJECT_DIR$" />
       <setting name="debug" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
@@ -884,6 +775,25 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="GriffonRunConfigurationType" factoryName="Griffon">
@@ -916,6 +826,19 @@
       </ExternalSystemSettings>
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -941,19 +864,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1070,7 +980,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1083,13 +993,13 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48895434" sideWeight="0.6078125" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35346097" sideWeight="0.6078125" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22265625" sideWeight="0.51104563" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22265625" sideWeight="0.64653903" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1112,11 +1022,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gradlew">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.1" vertical-offset="2050" max-vertical-offset="2550" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="500" />
@@ -1137,11 +1042,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1440" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cloudboard/build/source/r/debug/io/hgeg/cloudboard/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="47" selection-start="1740" selection-end="1740" vertical-scroll-proportion="0.8865815" vertical-offset="0" max-vertical-offset="810" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="500" />
@@ -1150,20 +1050,6 @@
     <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/res/menu/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="40" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="35" selection-start="522" selection-end="522" vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="453" selection-end="453" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
           <folding />
         </state>
       </provider>
@@ -1191,6 +1077,27 @@
     <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Push.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="48" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.0" vertical-offset="281" max-vertical-offset="1305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/res/drawable-hdpi/service.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="41" selection-start="960" selection-end="960" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+          <folding>
+            <element signature="e#1211#1231#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/CloudSyncService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="25" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="525">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1199,25 +1106,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/Synchronize.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="3772" selection-end="3772" vertical-scroll-proportion="0.0" vertical-offset="1136" max-vertical-offset="1455">
+        <state line="27" column="42" selection-start="757" selection-end="757" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1455">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="136" selection-end="136" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/SyncListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="34" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+        <state line="10" column="9" selection-start="258" selection-end="258" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Cloudboard/src/main/java/io/hgeg/cloudboard/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="25" selection-start="2778" selection-end="2778" vertical-scroll-proportion="0.49019608" vertical-offset="810" max-vertical-offset="1965">
-          <folding>
-            <element signature="e#1355#1543#0" expanded="true" />
-            <element signature="e#1531#1532#0" expanded="true" />
-          </folding>
+        <state line="131" column="10" selection-start="4406" selection-end="4406" vertical-scroll-proportion="0.5477387" vertical-offset="1492" max-vertical-offset="1890">
+          <folding />
         </state>
       </provider>
     </entry>

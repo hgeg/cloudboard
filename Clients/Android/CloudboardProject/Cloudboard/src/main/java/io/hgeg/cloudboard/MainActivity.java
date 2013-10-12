@@ -1,14 +1,10 @@
 package io.hgeg.cloudboard;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
@@ -35,15 +31,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         model = this;
-        clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        clipboard.addPrimaryClipChangedListener(new SyncListener());
-        this.registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                pubnub.disconnectAndResubscribe();
-            }
-
-        }, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        // use this to start and trigger a service
+        Intent i= new Intent(this, CloudSyncService.class);
+        // potentially add data to the intent
+        this.startService(i);
 
         TextView clipView = (TextView) this.findViewById(R.id.clipView);
         clipView.setMovementMethod(new ScrollingMovementMethod());
@@ -138,7 +129,7 @@ public class MainActivity extends Activity {
     }
 
     public static void setClipText(String clipText) {
-        clipboard.setPrimaryClip(ClipData.newPlainText("io.hgeg.cloudboard.clipdata",clipText));
+        //clipboard.setPrimaryClip(ClipData.newPlainText("io.hgeg.cloudboard.clipdata",clipText));
     }
 
 

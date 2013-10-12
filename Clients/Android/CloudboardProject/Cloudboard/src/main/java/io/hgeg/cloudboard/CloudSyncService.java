@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Created by can on 10/8/13.
@@ -14,25 +13,17 @@ public class CloudSyncService extends Service {
     String tag="io.hgeg.cloudboard";
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        Toast.makeText(this, "Service created...", Toast.LENGTH_LONG).show();
-        Log.i(tag, "Service created...");
-    }
-
-    @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
-        Log.i(tag, "Service started...");
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(this, "Service destroyed...", Toast.LENGTH_LONG).show();
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        //TODO do something useful
+        Log.e(tag,"service started");
+        //MainActivity.clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        //((MainActivity.clipboard.addPrimaryClipChangedListener(new SyncListener());
+        return Service.START_STICKY;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        //TODO for communication return IBinder implementation
         return null;
     }
 }
